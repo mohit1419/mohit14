@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Parking Space Finder</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-color: #f4f4f4;
+    }
+
+    #parkingMap {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      grid-gap: 10px;
+    }
+
+    .parking-spot {
+      height: 50px;
+      background-color: #7f8c8d;
+      border: 1px solid #2c3e50;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 14px;
+      cursor: pointer;
+    }
+
+    .parking-spot.available {
+      background-color: #27ae60;
+    }
+
+    .parking-spot.reserved {
+      background-color: #e74c3c;
+    }
+  </style>
+</head>
+<body>
+
+<div id="parkingMap"></div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const parkingMap = document.getElementById('parkingMap');
+    const totalSpots = 25;
+
+    for (let i = 1; i <= totalSpots; i++) {
+      const spot = document.createElement('div');
+      spot.className = 'parking-spot';
+      spot.innerText = i;
+
+      // Simulate some spots as reserved
+      if (i % 5 === 0) {
+        spot.classList.add('reserved');
+      } else {
+        spot.classList.add('available');
+
+        // Add click event listener to available spots
+        spot.addEventListener('click', function () {
+          reserveSpot(i);
+        });
+      }
+
+      parkingMap.appendChild(spot);
+    }
+
+    function reserveSpot(spotNumber) {
+      const spot = document.querySelector(.parking-spot:nth-child(${spotNumber}));
+      if (spot && spot.classList.contains('available')) {
+        spot.classList.remove('available');
+        spot.classList.add('reserved');
+        alert(Spot ${spotNumber} has been reserved.);
+      } else {
+        alert(Spot ${spotNumber} is already reserved.);
+      }
+    }
+  });
+</script>
+
+</body>
+</html>
